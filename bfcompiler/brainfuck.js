@@ -18,11 +18,11 @@ function main() {
             console.log(`
 Brainfuck Runner
 
-Uso:
+Usage:
 
-  node bf_exe_ext\\\\bf.js archivo.bf
-  node bf_exe_ext\\\\bf.js archivo.bf --memory 50000
-  node bf_exe_ext\\\\bf.js archivo.bf --input "Hola"
+  node bfcompiler\\\\bf.js archive.bf
+  node bfcompiler\\\\bf.js archive.bf --memory 50000
+  node bfcompiler\\\\bf.js archive.bf --input "Hello"
 `);
             return;
         }
