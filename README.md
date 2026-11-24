@@ -31,6 +31,12 @@ node brainfuck.js program.bf --memory 50000
 node brainfuck.js program.bf --maxsteps 100000
 ```
 
+### Debug mode
+
+```bash
+node brainfuck.js program.bf --debug
+```
+
 ## Brainfuck
 
 BF Compiler supports the standard Brainfuck instructions:
