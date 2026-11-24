@@ -2,12 +2,12 @@
 
 Welcome to **BF Compiler**, a Brainfuck compiler written in JavaScript.
 
-BF Compiler allows you to compile and work with **Brainfuck (`.bf`) programs** directly from the command line.
+BF Compiler allows you to compile and work with **Brainfuck (`.b` and `.bf`) programs** directly from the command line.
 
 ## Features
 
 * Brainfuck compiler written in JavaScript
-* `.bf` file support
+* `.bf` and `.b` file support
 * Configurable memory size
 * Maximum execution step limit
 * Brainfuck error detection
