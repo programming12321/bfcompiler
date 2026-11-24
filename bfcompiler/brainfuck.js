@@ -37,9 +37,9 @@ Usage:
             );
         }
 
-        if (path.extname(filePath).toLowerCase() !== ".bf") {
+        if (![".bf", ".b"].includes(path.extname(filePath).toLowerCase())) {
             throw new Error(
-                "File must have .bf extension."
+                "File must have .bf or .b extension."
             );
         }
 
