@@ -10,6 +10,7 @@ BF Compiler allows you to compile and work with **Brainfuck (`.b` and `.bf`) pro
 * `.bf` and `.b` file support
 * Configurable memory size
 * Maximum execution step limit
+* Debug mode
 * Brainfuck error detection
 * Command-line interface
 
