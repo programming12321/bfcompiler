@@ -13,6 +13,7 @@ BF Compiler allows you to compile and work with **Brainfuck (`.b` and `.bf`) pro
 * Debug mode
 * Brainfuck error detection
 * Command-line interface
+* Faster than https://copy.sh/brainfuck (uses **microseconds**).
 
 ## Usage
 
