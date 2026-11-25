@@ -51,6 +51,9 @@ class BrainfuckRunner {
 
         this.steps = 0;
 
+        this.ms = 0;
+        this.micros = 0;
+
         this.jumpForward = new Map();
         this.jumpBackward = new Map();
     }
@@ -70,54 +73,47 @@ class BrainfuckRunner {
 
         this.steps = 0;
 
+        this.ms = 0;
+        this.micros = 0;
+
         this.jumpForward.clear();
         this.jumpBackward.clear();
     }
 
 
     validate(code) {
-
         const stack = [];
 
-        for (let i = 0; i < code.length; i++) {
+        this.jumpForward.clear();
+        this.jumpBackward.clear();
 
+        for (let i = 0; i < code.length; i++) {
             const instruction = code[i];
 
             if (instruction === "[") {
-
                 stack.push(i);
+            }
 
-            } else if (instruction === "]") {
-
+            else if (instruction === "]") {
                 if (stack.length === 0) {
-
                     throw new BrainfuckError(
-                        "']' without a matching '['",
+                        "Unexpected ']' without matching '['",
                         i
                     );
                 }
 
                 const open = stack.pop();
 
-                this.jumpForward.set(
-                    open,
-                    i
-                );
-
-                this.jumpBackward.set(
-                    i,
-                    open
-                );
+                this.jumpForward.set(open, i);
+                this.jumpBackward.set(i, open);
             }
         }
 
         if (stack.length > 0) {
-
-            const position =
-                stack[stack.length - 1];
+            const position = stack[0];
 
             throw new BrainfuckError(
-                "'[' without a matching ']'",
+                "Unclosed '[' without matching ']'",
                 position
             );
         }
@@ -127,6 +123,8 @@ class BrainfuckRunner {
     execute(code, input = "") {
 
         this.reset();
+
+        const startTime = performance.now();
 
         code = String(code);
         this.input = String(input);
@@ -304,25 +302,27 @@ class BrainfuckRunner {
                     break;
             }
         }
-
+        this.ms = performance.now() - startTime;
+        this.micros = this.ms * 1000;
         
-if (this.debugOn) {
-    const usedCells = [];
+        if (this.debugOn) {
+            const usedCells = [];
 
-    for (let i = 0; i < this.memory.length; i++) {
-        if (this.memory[i] !== 0) {
-            usedCells.push(
-                `${this.memory[i]}`
-            );
+            for (let i = 0; i < this.memory.length; i++) {
+                if (this.memory[i] !== 0) {
+                    usedCells.push(
+                        `${this.memory[i]}`
+                    );
+                }
+            }
+
+            console.error(`Cells: ${usedCells.join(", ")}`);
+            console.error(`Steps: ${this.steps}`);
+            console.error(`Pointer: ${this.pointer}\n`);
+            console.error(`Finished in ${this.ms.toFixed(2)}ms (${this.micros.toFixed(2)}μs).\n`);
         }
-    }
 
-    console.error(`Cells: ${usedCells.join(", ")}`);
-    console.error(`Steps: ${this.steps}`);
-    console.error(`Pointer: ${this.pointer}\n`);
-}
-
-return this.output;
+        return this.output;
 
     }
 }
